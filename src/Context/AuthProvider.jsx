@@ -104,7 +104,7 @@ function AuthProvider({children}) {
 //TODO PASS THE NEW PASSWORD AND CODE AND AUTH
     const ForgotPassword = () => {
         const actionCodeSettings = {
-            url: 'http://localhost:5173/',
+            url: 'https://pudoc-west-children-monitoring.vercel.app/',
             handleCodeInApp: false
         };
         sendPasswordResetEmail(auth, "baldwinnicoa@gmail.com",actionCodeSettings)
