@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 
 import './index.css'
 import Map from "./Components/Map.jsx";
@@ -15,6 +15,7 @@ import {FormProvider} from "./Context/FormContext.jsx";
 import useFetchByCategory from "./CustomHook/useFetchByCategory.js";
 import * as path from "node:path";
 import ProgramProvider from "./Context/ProgramContext.jsx";
+import supabase from "./Firebase-config/supabase-config.js";
 
 function App() {
 

@@ -110,7 +110,7 @@ function Children(props) {
                                     </Button>
                                 </MenuHandler>
                                 <MenuList>
-                                    {TABS.map((value, index, array) => {
+                                    {TABS?.map((value, index, array) => {
                                         return <MenuItem onClick={() => FilterCategory(value.value)}
                                                          key={index}>{value.label}</MenuItem>
                                     })}
