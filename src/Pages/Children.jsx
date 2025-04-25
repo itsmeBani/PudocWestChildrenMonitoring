@@ -56,11 +56,11 @@ const TABLE_HEAD = ["Full name of Child", "Name of the Caregiver", "sex", "weigh
 
 
 function Children(props) {
-    const {OpenModal, DeleteCases, Filter, SetFilter, EditCase, Result} = useContext(FormContext)
+    const {OpenModal, DeleteCases, Filter, setFilter, EditCase, Result} = useContext(FormContext)
 
 
     const FilterCategory = (purok) => {
-        SetFilter(purok)
+        setFilter(purok)
     }
     const [ChildrenList,setChildrenList]=useState([])
 

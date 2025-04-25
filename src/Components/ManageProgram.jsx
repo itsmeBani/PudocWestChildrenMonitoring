@@ -25,7 +25,7 @@ export function List({data, onClick, loading, Adding}) {
         item?.firstName?.toLowerCase().includes(search.toLowerCase()) |
         item?.caregiver?.toLowerCase().includes(search.toLowerCase())
     );
-if (loading) return <div className="flex w-full "><Loader/></div>
+// if (loading) return <div className="flex w-full "><Loader/></div>
  if(!data.length > 0) return <EmptyState message={Adding ? "All children have been added to this program" : "There are no participants at the moment"} />;
 
     return (
@@ -175,7 +175,6 @@ function ManageProgram({ProgramID}) {
             ToggleLoading({adding: false})
             Reload()
         }
-
     };
 
 
@@ -232,12 +231,13 @@ function ManageProgram({ProgramID}) {
                     <List Adding={true}
                           onClick={HandleAddingParticipants}
                           data={ChildrenData}
-                          loading={isLoading}
+                          loading={loading}
                     /> :
                     <List Adding={false}
                           onClick={HandleRemoveParticipant}
-                          loading={isLoadingProgram}
+                          loading={loading}
                           data={ListOfParticipants}
+
                     />
             }
 

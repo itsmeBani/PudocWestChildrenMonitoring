@@ -8,7 +8,7 @@ export const FormContext = createContext({})
 
 
 export const FormProvider = ({children}) => {
-    const {Result,Filter, SetFilter,reload} = useFetchByCategory()
+    const {Result,Filter, setFilter,reload} = useFetchByCategory()
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = useState(false)
     const [Error, setError] = useState(null)
@@ -96,7 +96,7 @@ export const FormProvider = ({children}) => {
             Result,
             Filter,
             DeleteCases,
-            SetFilter,
+            setFilter,
             handleChange,
             formData,
             OpenModal,
