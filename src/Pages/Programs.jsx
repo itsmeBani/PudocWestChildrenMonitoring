@@ -1,9 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Button, Input, Popover, PopoverContent, PopoverHandler, Typography} from "@material-tailwind/react";
 import ProgramCard from "../Components/ProgramCard.jsx";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/outline/index.js";
-// import {ProgramModal} from "../Components/ProgramModal.jsx";
-import {ProgramContext} from "../Context/ProgramContext.jsx";
 import Gallery from "../Components/Gallery.jsx";
 import ManageProgram from "../Components/ManageProgram.jsx";
 import Loader from "../Components/Loader.jsx";
@@ -11,8 +8,6 @@ import useFetchPrograms from "../CustomHook/useFetchPrograms.js";
 import {ProgramModal} from "../Components/ProgramModal.jsx";
 import {addDoc, collection, deleteDoc, doc, serverTimestamp, writeBatch} from "firebase/firestore";
 import {db} from "../Firebase-config/firebase.js";
-import useDebounce from "../CustomHook/useDebounce.js";
-import EmptyState from "../Components/EmptyState.jsx";
 import InputFilter from "../Components/InputFilter.jsx";
 
 function Programs(props) {
@@ -29,11 +24,9 @@ function Programs(props) {
     const RenderModalContent = () => {
         switch (activeContent) {
             case "gallery":
-                return <Gallery/>
+                return <Gallery   ProgramID={ProgramID}/>
             case "manage":
                 return <ManageProgram ProgramID={ProgramID}/>
-            case "AddProgram":
-                return <div>add</div>
             default:
                 return <Loader/>
         }
