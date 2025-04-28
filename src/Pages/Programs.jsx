@@ -160,7 +160,7 @@ function Programs(props) {
                 <div
                     className="grid mt-2 overflow-y-auto px-3 md:px-5  gap-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
                     {ProgramList?.map((programData, index) => {
-                        return <ProgramCard key={ProgramData.id} onDelete={DeleteProgram} onClick={HandleChangeContent} data={programData}/>
+                        return <ProgramCard  key={ProgramData.id} onDelete={DeleteProgram} onClick={HandleChangeContent} data={programData}/>
                     })}
                 </div>
 

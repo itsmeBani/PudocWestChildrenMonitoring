@@ -51,8 +51,9 @@ import {collection, addDoc} from "firebase/firestore";
 import {FormContext} from "../Context/FormContext.jsx";
 import useDebounce from "../CustomHook/useDebounce.js";
 import InputFilter from "../Components/InputFilter.jsx";
+import {useBmi} from "../CustomHook/useBmi.js";
 
-const TABLE_HEAD = ["Full name of Child", "Name of the Caregiver", "sex", "weight", "height", "Age in Months", "Action"];
+const TABLE_HEAD = ["Full name of Child", "Name of the Caregiver", "sex", "weight", "height", "Age","status", "Action"];
 
 
 function Children(props) {
@@ -71,6 +72,11 @@ function Children(props) {
         item?.caregiver?.toLowerCase().includes(search.toLowerCase())
     );
 
+    const {ranges,getBMIStatus} =useBmi()
+
+
+
+
     return (
 
 
@@ -80,7 +86,7 @@ function Children(props) {
                 <ChildrenModal/>
 
                 <CardHeader floated={false} shadow={false} className="rounded-none">
-                    <div className="mb-8 flex items-center justify-between gap-8">
+                    <div className="mb-2 flex items-center justify-between gap-8">
                         <div>
                             <Typography variant="h5" color="blue-gray">
                                 Malnourished Children
@@ -99,6 +105,16 @@ function Children(props) {
 
                     </div>
 
+                    <div className="grid grid-cols-3 mb-2">
+
+                        {ranges.map((item,index)=>{
+
+                            return <div className="flex  gap-1"><Chip value={null}  color={item?.color} className="mt-1 w-[12px] px-0 h-[10px]  rounded-lg"   /><p className="text-[13px]">{item?.status}</p></div>
+                        })}
+
+
+
+                    </div>
                     <div className="flex flex-col  items-center justify-between gap-4 md:flex-row">
                         <div className="w-full flex gap-2">
                             <Menu placement={"bottom-start"}>
@@ -156,11 +172,15 @@ function Children(props) {
                                     : "p-2 border-b-[2px] max-w-[100px] min-w-[100px]  text-start border-blue-gray-50";
 
                                 let ageInYears = new Date().getFullYear() - new Date(birthdate).getFullYear();
-                                let ageInMonths = (new Date().getFullYear() - new Date(birthdate).getFullYear()) * 12 + new Date().getMonth() - new Date(birthdate).getMonth();
                                 if (new Date().getMonth() < new Date(birthdate).getMonth() || (new Date().getMonth() === new Date(birthdate).getMonth() && new Date().getDate() < new Date(birthdate).getDate())) {
                                     ageInYears--;
-                                    ageInMonths -= 12;
                                 }
+                                const METER_IN_HEIGHT=height/100
+                                let BMI = weight / (METER_IN_HEIGHT * METER_IN_HEIGHT);
+
+
+                                let { status, color,txt } = getBMIStatus(BMI);
+
                                 return (
                                     <tr key={index}>
                                         <td className={classes}>
@@ -223,11 +243,15 @@ function Children(props) {
                                                 variant="small"
                                                 color="blue-gray"
                                                 className="font-normal"
-                                            >{ageInMonths}
+                                            >{ageInYears}
 
                                             </Typography>
                                         </td>
-
+                                        <td className={classes}>
+                                            <div className="flex justify-center">
+                                                <Chip variant={"ghost"} color={color} className=" text-center text-[10px]" value={txt} />
+                                            </div>
+                                        </td>
                                         <td className={"w-full flex p-2 gap-2"}>
                                             <Tooltip className="bg-indigo-700" content="Edit">
                                                 <IconButton onClick={() => EditCase(data)} className="" size={'sm'}

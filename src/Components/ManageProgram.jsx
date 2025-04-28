@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 
 import {ChevronUpDownIcon, MagnifyingGlassIcon,} from "@heroicons/react/24/outline";
 import {CheckCircleIcon, UserGroupIcon} from "@heroicons/react/24/solid";
-import {Button, Card, CardBody, Input, Typography,} from "@material-tailwind/react";
+import {Button, Card, CardBody, DialogHeader, Input, Typography,} from "@material-tailwind/react";
 import useFetchByCategory from "../CustomHook/useFetchByCategory.js";
 import {deleteDoc, doc, setDoc} from "firebase/firestore";
 import {db} from "../Firebase-config/firebase.js";
@@ -210,6 +210,13 @@ function ManageProgram({ProgramID}) {
     const ChildrenData = ChildrenList()
     return (
         <div className="w-full flex flex-col  h-full">
+            <DialogHeader className="relative m-0 block">
+                <Typography variant="h4" color="blueGray">
+                    Participants
+                </Typography>
+                <Typography className="mt-1 font-normal text-gray-600">
+                    Below is the comprehensive list of individuals who participated in this meaningful feeding program</Typography>
+            </DialogHeader>
             <div className="rounded-none">
                 <div className="mb-2 flex  w-full  ">
                     <div className="flex  flex-col justify-end w-full place-items-center gap-2 sm:flex-row">

@@ -1,7 +1,11 @@
 import React from 'react';
 import {Avatar, Chip, List, ListItem, ListItemPrefix, Typography} from "@material-tailwind/react";
+import {useBmi} from "../CustomHook/useBmi.js";
 
 function RecentCases({getRecentCases}) {
+    const {ranges,getBMIStatus} =useBmi()
+
+
     return (
         <div className={"h-full"}>
 
@@ -13,6 +17,12 @@ function RecentCases({getRecentCases}) {
             </div>
                 <List>
                     {getRecentCases?.map((item, j) => {
+                        const METER_IN_HEIGHT=item?.height/100
+                        let BMI = item?.weight / (METER_IN_HEIGHT * METER_IN_HEIGHT);
+
+
+                        let { status, color,txt } = getBMIStatus(BMI);
+
                         return(
                             <ListItem className=" py-0 md:py-1.5 px-2 ">
                                 <div className="flex justify-between w-full place-items-center ">
@@ -33,12 +43,9 @@ function RecentCases({getRecentCases}) {
                                      <Typography variant="small" color="gray" className="font-normal">
                                          Purok {item?.purok}
                                      </Typography>
-                                     <Chip className="text-[9px] rounded-unset"
-                                         size="sm"
-                                         variant="ghost"
-                                         value={"normal"}
-                                         color={"yellow"}
-                                     />
+                                     <div className="w-full flex justify-center">
+                                         <Chip variant={"ghost"} color={color} className="w-full  text-center text-[10px]" value={txt} />
+                                     </div>
                                  </div>
 
                                 </div>

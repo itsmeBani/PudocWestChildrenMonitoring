@@ -2,10 +2,10 @@ import React, {useContext} from 'react';
 import {Cog6ToothIcon, UserGroupIcon} from "@heroicons/react/24/outline";
 // import {ProgramModal} from "./ProgramModal.jsx";
 import {ProgramContext} from "../Context/ProgramContext.jsx";
-import {Button, Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/react";
+import {Button, Menu, MenuHandler, MenuItem, MenuList, Switch} from "@material-tailwind/react";
 import {PencilIcon, PencilSquareIcon, TrashIcon} from "@heroicons/react/24/solid";
 
-function ProgramCard({data,onClick,onDelete}) {
+function ProgramCard({data, onClick, onDelete}) {
 
     return (
         <div>
@@ -16,7 +16,7 @@ function ProgramCard({data,onClick,onDelete}) {
                         <div className="flex flex-col justify-between gap-1 ml-3  h-full     ">
                             <div className="flex flex-wrap ">
                                 <div className="w-full flex-none text-sm text-blue-700 font-medium ">
-                                   Feeding Program
+                                    Feeding Program
                                 </div>
                                 <h2 className="flex-auto text-[14px] md:text-lg font-normal md:leading-[24px] md:font-bold">{data?.programName}</h2>
                             </div>
@@ -50,12 +50,13 @@ function ProgramCard({data,onClick,onDelete}) {
                             </div>
 
 
-                            <div className="flex   justify-center place-items-center md:justify-end pt-2  md:pt-4 gap-1 text-sm font-medium">
-                                <button onClick={()=>onClick("gallery",data?.id)}
-                                    className="mb-2 text-[10px] w-full md:w-auto md:mb-0 bg-gray-900 md:px-5  px-4 py-1  md:py-2 shadow-sm tracking-wider text-white rounded-full  hover:bg-gray-800"
-                                    type="button" aria-label="like">Gallery
+                            <div
+                                className="flex   justify-center place-items-center md:justify-end pt-2  md:pt-4 gap-1 text-sm font-medium">
+                                <button onClick={() => onClick("gallery", data?.id)}
+                                        className="mb-2 text-[10px] w-full md:w-auto md:mb-0 bg-gray-900 md:px-5  px-4 py-1  md:py-2 shadow-sm tracking-wider text-white rounded-full  hover:bg-gray-800"
+                                        type="button" aria-label="like">Gallery
                                 </button>
-                                <button onClick={()=>onClick("manage",data?.id)}
+                                <button onClick={() => onClick("manage", data?.id)}
                                         className="mb-2 text-[10px] w-full md:w-auto md:mb-0 bg-gray-900 md:px-5  px-4 py-1  md:py-2 shadow-sm tracking-wider text-white rounded-full  hover:bg-gray-800"
                                         type="button" aria-label="like">Manage
                                 </button>
@@ -63,21 +64,25 @@ function ProgramCard({data,onClick,onDelete}) {
                             </div>
 
 
-
                             <div className="absolute top-3.5 right-3.5">
 
 
                                 <Menu placement={"left-start"}
-
+                                      dismiss={{
+                                          itemPress: false,
+                                      }}
                                 >
                                     <MenuHandler>
                                         <Cog6ToothIcon color={"rgba(69,69,69,0.86)"} className="w-6"/>
 
                                     </MenuHandler>
-                                    <MenuList className={"hover:text-red"}>
-                                        <MenuItem onClick={()=>onDelete(data?.id)}  className="flex place-items-center hover:text-red-300 h-full gap-2 text-red-400"  ><TrashIcon className="w-5 " color="light-red"/> Delete</MenuItem>
-
+                                    <MenuList className={"hover:text-red p-2 overflow-hidden"}>
+                                        <MenuItem onClick={() => onDelete(data?.id)}
+                                                  className="flex p-1 place-items-center hover:text-red-300 h-full gap-2 text-red-400"><TrashIcon
+                                            className="w-5 " color="light-red"/> Delete</MenuItem>
+                                        <MenuItem><Switch   checked={data?.finished} color={"blue"} label={"Finished"}/></MenuItem>
                                     </MenuList>
+
                                 </Menu>
                             </div>
                         </div>
