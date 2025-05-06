@@ -12,7 +12,7 @@ import Loaderupload from "./loaderupload.jsx";
 
 export default function Gallery({ProgramID}) {
     const fileRef = useRef(null)
-    const [images, setImagesUrl] = useState(null)
+    const [images, setImagesUrl] = useState([])
     const [loading, setLoading] = useState(false)
     const [stateMessage,setStateMessage]=useState({
         error: "",
@@ -56,6 +56,8 @@ export default function Gallery({ProgramID}) {
                     cacheControl: '3600',
                     upsert: true
                 })
+
+
             const {data: ImageUrl, error: ErrorUrl} = supabase
                 .storage
                 .from('poducwest')
@@ -71,6 +73,8 @@ export default function Gallery({ProgramID}) {
                 FetchImages().then()
             }
         } catch (e) {
+
+            console.log(e)
             setStateMessage({
                 success: "",
                 error: "Failed to Upload"

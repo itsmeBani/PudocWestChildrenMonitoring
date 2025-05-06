@@ -117,7 +117,7 @@ function Programs(props) {
                 <div className="flex md:flex-row flex-col items-center justify-between w-full md:my-  sm:pr-4">
                     <div className="flex px-4 md:pt-3 pb-2 flex-col">
                         <Typography className="text-[18px] md:text-2xl font-bold leading-1" variant="p">
-                            Feeding Program in Poduc West
+                            Programs in Poduc West
                         </Typography>
                         <Typography className=" text-[12px] md:text-[14px] leading-4 md:leading-[20px] text-gray-700">
                             This effort aims to improve community involvement and promote better nutrition for children.
