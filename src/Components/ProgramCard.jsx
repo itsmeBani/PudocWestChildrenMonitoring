@@ -16,7 +16,7 @@ function ProgramCard({data, onClick, onDelete}) {
                         <div className="flex flex-col justify-between gap-1 ml-3  h-full     ">
                             <div className="flex flex-wrap ">
                                 <div className="w-full flex-none text-sm text-blue-700 font-medium ">
-                                    Feeding Program
+                                     Program
                                 </div>
                                 <h2 className="flex-auto text-[14px] md:text-lg font-normal md:leading-[24px] md:font-bold">{data?.programName}</h2>
                             </div>

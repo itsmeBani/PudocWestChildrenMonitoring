@@ -31,7 +31,7 @@ function Programs(props) {
                 return <Loader/>
         }
     }
-
+  const ModalSize=activeContent === "gallery" ? "xl" : "md"
 
     const HandleOpenModal = () => {
         setOpenModal(true)
@@ -45,29 +45,7 @@ function Programs(props) {
         HandleOpenModal()
     }
 
-    const handleInsert = async () => {
-        const batch = writeBatch(db);
 
-        const data = [
-            {name: "Jeep 1", route: "Route A", status: "active"},
-            {name: "Jeep 2", route: "Route B", status: "waiting"},
-            {name: "Jeep 3", route: "Route C", status: "inactive"},
-        ];
-
-        const colRef = collection(db, "test");
-
-        data.forEach((entry) => {
-            const newDocRef = doc(colRef);
-            batch.set(newDocRef, entry);
-        });
-
-        try {
-            await batch.commit();
-            console.log("Batch write successful!");
-        } catch (error) {
-            console.error("Error writing batch: ", error);
-        }
-    };
 
 
     const InsertProgram = async (e) => {
@@ -164,7 +142,7 @@ function Programs(props) {
                     })}
                 </div>
 
-                <ProgramModal HandleOpenModal={HandleOpenModal} HandleCloseModal={HandleCloseModal}
+                <ProgramModal size={ModalSize}  HandleOpenModal={HandleOpenModal} HandleCloseModal={HandleCloseModal}
                               OpenModal={OpenModal}>
                     <RenderModalContent/>
 

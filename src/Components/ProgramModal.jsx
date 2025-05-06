@@ -12,11 +12,11 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {ProgramContext} from "../Context/ProgramContext.jsx";
 
-export function ProgramModal({children,HandleCloseModal,HandleOpenModal,OpenModal}) {
+export function ProgramModal({children,HandleCloseModal,size,OpenModal}) {
 
     return (
 
-            <Dialog  size={"md"}    open={OpenModal}  handler={HandleCloseModal} className="p-4 h-[97dvh] m-0 flex flex-col  ">
+            <Dialog  size={size}   open={OpenModal}  handler={HandleCloseModal} className="p-4 h-[97dvh] m-0 flex flex-col  ">
 
                     <IconButton
                         size="sm"
