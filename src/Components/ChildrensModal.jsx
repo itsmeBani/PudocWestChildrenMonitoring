@@ -189,9 +189,9 @@ export function ChildrenModal() {
                                 color="gray"
                                 size="lg"
                                 placeholder="eg. 40"
-
+                                type={"number"}
                                 value={formData.weight}
-                                onChange={(e) => handleChange(e.target.value, "weight")}
+                                onChange={(e) => handleChange(parseFloat(e.target.value), "weight")}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 containerProps={{
                                     className: "!min-w-full",
@@ -208,9 +208,10 @@ export function ChildrenModal() {
                             <Input
                                 color="gray"
                                 size="lg"
+                                type={"number"}
                                 placeholder="eg. 150"
                                 value={formData.height}
-                                onChange={(e) => handleChange(e.target.value, "height")}
+                                onChange={(e) => handleChange(parseFloat(e.target.value), "height")}
                                 className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                                 containerProps={{
                                     className: "!min-w-full",

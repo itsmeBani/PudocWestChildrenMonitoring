@@ -28,11 +28,27 @@ export default function useFetchByCategory() {
 
     const SetQuery = async (q) => {
         const querySnapshot = await getDocs(q);
-        return querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
+
+        return  await Promise.all(
+            querySnapshot.docs.map(async (doc) => {
+                const getSubCollection = await getDocs(
+                    collection(doc.ref, 'history')
+                );
+
+                const data2 = getSubCollection.docs.map((subDoc) => ({
+                    id: subDoc.id,
+                    ...subDoc.data(),
+                }));
+
+                return {
+                    id: doc.id,
+                    ...doc.data(),
+                    collection: data2,
+                };
+            })
+        );
     };
+
 
     const fetchRecentCases = async () => {
         try {

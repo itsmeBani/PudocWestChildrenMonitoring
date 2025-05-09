@@ -95,7 +95,7 @@ function Programs(props) {
                 <div className="flex md:flex-row flex-col items-center justify-between w-full md:my-  sm:pr-4">
                     <div className="flex px-4 md:pt-3 pb-2 flex-col">
                         <Typography className="text-[18px] md:text-2xl font-bold leading-1" variant="p">
-                            Programs in Poduc West
+                            Programs in Pudcc West
                         </Typography>
                         <Typography className=" text-[12px] md:text-[14px] leading-4 md:leading-[20px] text-gray-700">
                             This effort aims to improve community involvement and promote better nutrition for children.
@@ -137,7 +137,7 @@ function Programs(props) {
 
                 <div
                     className="grid mt-2 overflow-y-auto px-3 md:px-5  gap-2 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
-                    {ProgramList?.map((programData, index) => {
+                    {ProgramList?.map((programData) => {
                         return <ProgramCard  key={ProgramData.id} onDelete={DeleteProgram} onClick={HandleChangeContent} data={programData}/>
                     })}
                 </div>

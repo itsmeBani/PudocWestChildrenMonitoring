@@ -1,8 +1,9 @@
 import React, {createContext, useState} from "react";
 import {malnutritionSchema} from "../Components/scheme.js";
-import {addDoc, deleteDoc,updateDoc, collection, doc,serverTimestamp} from "firebase/firestore";
+import {addDoc, deleteDoc, updateDoc, collection, doc, serverTimestamp, setDoc} from "firebase/firestore";
 import {db} from "../Firebase-config/firebase.js";
 import useFetchByCategory from "../CustomHook/useFetchByCategory.js";
+import {useBmi} from "../CustomHook/useBmi.js";
 
 export const FormContext = createContext({})
 
@@ -11,6 +12,7 @@ export const FormProvider = ({children}) => {
     const {Result,Filter, setFilter,reload} = useFetchByCategory()
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = useState(false)
+    const {ranges,getBMIStatus} =useBmi()
     const [Error, setError] = useState(null)
     const initialValues = {
         firstName: "",
@@ -19,9 +21,12 @@ export const FormProvider = ({children}) => {
         purok: 0,
         birthdate: "",
         sex: "",
-        weight: "",
-        height: "",
+        weight: 0,
+        height: 0
     }
+    const [recentStatus,setRecentStatus]=useState()
+
+
     const [formData, setFormData] = useState(initialValues);
     const [isUpdating, setisUpdating] = useState(null)
     const OpenModal = () => {
@@ -30,6 +35,7 @@ export const FormProvider = ({children}) => {
         setOpen(true)
     };
     const CloseModal = () => {
+        setRecentStatus(null)
         setOpen(false)
     }
     const handleChange = (value, name) => {
@@ -38,8 +44,18 @@ export const FormProvider = ({children}) => {
             [name]: value,
         }));
     };
+    const ChangeStatus=(data,recentStatus)=>{
+        const METER_IN_HEIGHT=data?.height/100
+        let BMI = data?.weight / (METER_IN_HEIGHT * METER_IN_HEIGHT);
+        let { status, color,txt } = getBMIStatus(BMI);
+
+        return status !== recentStatus;
+
+    }
+
     const SaveNewCases = async (e) => {
         e.preventDefault()
+        console.log(formData)
         const result = malnutritionSchema.safeParse(formData);
         if (!result.success) {
             console.log(result.error.flatten().fieldErrors)
@@ -52,25 +68,41 @@ export const FormProvider = ({children}) => {
 
 
             if (isUpdating && formData.id) {
-                await updateDoc(doc(db, "children", formData.id), {...formData,lastUpdate:serverTimestamp()});
+                await updateDoc(doc(db, "children", formData.id), {...formData,lastUpdate:serverTimestamp(),});
+                const StatusIsChange=ChangeStatus(formData,recentStatus)
+
+                if (StatusIsChange){
+
+                    const ref = collection(db, 'children', formData.id, 'history');
+                    await addDoc(ref, formData);
+                }
+
             } else {
                 await addDoc(collection(db, "children"), {...formData,dateCreated:serverTimestamp()});
 
             }
 
             setFormData(initialValues)
-            setLoading(false)
             reload()
             CloseModal()
 
         } catch (e) {
             alert(e)
+            console.log(e)
+        }finally {
+            setLoading(false)
         }
 
     };
-    const EditCase = (data) => {
+
+
+
+
+
+    const EditCase = (data,recentStatus) => {
         setisUpdating(true)
         setFormData(data)
+        setRecentStatus(recentStatus)
         setOpen(true)
     }
 

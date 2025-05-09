@@ -16,7 +16,7 @@ import {
     UserGroupIcon,
     Square2StackIcon,
     RectangleGroupIcon,
-    ChatBubbleLeftEllipsisIcon, MapIcon, UserCircleIcon, Bars3BottomLeftIcon,
+    ChatBubbleLeftEllipsisIcon, MapIcon, UserCircleIcon, Bars3BottomLeftIcon, ClockIcon,
 } from "@heroicons/react/24/solid";
 import {
     ChevronDownIcon,
@@ -51,80 +51,89 @@ function SidebarLight() {
                     Pudoc West
                 </Typography>
             </div>
+<div className="flex flex-col h-full justify-between">
 
-            <List>
-                <Accordion open={open === 1}>
-                    <ListItem
-                        selected={open === 1}
-                        data-selected={open === 1}
-                        onClick={() => handleOpen(1)}
-                        className="p-3 select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
-                    >
+    <List>
+        <Accordion open={open === 1}>
+            <ListItem
+                selected={open === 1}
+                data-selected={open === 1}
+                onClick={() => handleOpen(1)}
+                className="p-3 select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
+            >
+                <ListItemPrefix>
+                    <Avatar
+                        size="sm"
+                        src={User?.photoURL && User?.photoURL}
+                    />
+                </ListItemPrefix>
+                <Typography className="mr-auto font-normal text-inherit">
+                    {auth.currentUser.displayName}
+                </Typography>
+                <ChevronDownIcon
+                    strokeWidth={3}
+                    className={`ml-auto h-4 w-4 text-gray-500 transition-transform ${open === 1 ? "rotate-180" : ""}`}
+                />
+            </ListItem>
+            <AccordionBody className="py-1">
+                <List className="p-0">
+                    <ListItem className={`px-16 ${LIST_ITEM_STYLES}`}>
                         <ListItemPrefix>
-                            <Avatar
-                                size="sm"
-                                src={User?.photoURL && User?.photoURL}
-                            />
+                            <UserCircleIcon className="h-5 w-5"/>
                         </ListItemPrefix>
-                        <Typography className="mr-auto font-normal text-inherit">
-                            {auth.currentUser.displayName}
-                        </Typography>
-                        <ChevronDownIcon
-                            strokeWidth={3}
-                            className={`ml-auto h-4 w-4 text-gray-500 transition-transform ${open === 1 ? "rotate-180" : ""}`}
-                        />
+                        My Profile
                     </ListItem>
-                    <AccordionBody className="py-1">
-                        <List className="p-0">
-                            <ListItem className={`px-16 ${LIST_ITEM_STYLES}`}>
-                                <ListItemPrefix>
-                                    <UserCircleIcon className="h-5 w-5"/>
-                                </ListItemPrefix>
-                                My Profile
-                            </ListItem>
-                        </List>
-                    </AccordionBody>
-                </Accordion>
-                <NavLink to={"/"}>
-                    <ListItem className={LIST_ITEM_STYLES}>
-                        <ListItemPrefix>
-                            <RectangleGroupIcon className="h-5 w-5"/>
-                        </ListItemPrefix>
-                        Dashboard
-                    </ListItem>
-                </NavLink>
-                <Link to={"/children"}>
-                    <ListItem className={LIST_ITEM_STYLES}>
-                        <ListItemPrefix>
-                            <UserGroupIcon className="h-5 w-5"/>
-                        </ListItemPrefix>
-                        Children
-                    </ListItem>
-                </Link>
-                <Link to={"/programs"}>
-                    <ListItem className={LIST_ITEM_STYLES}>
-                        <ListItemPrefix>
-                            <MapIcon className="h-5 w-5"/>
-                        </ListItemPrefix>
-                        Programs
-                    </ListItem>
-                </Link>
+                </List>
+            </AccordionBody>
+        </Accordion>
+        <NavLink to={"/"}>
+            <ListItem className={LIST_ITEM_STYLES}>
+                <ListItemPrefix>
+                    <RectangleGroupIcon className="h-5 w-5"/>
+                </ListItemPrefix>
+                Dashboard
+            </ListItem>
+        </NavLink>
+        <Link to={"/children"}>
+            <ListItem className={LIST_ITEM_STYLES}>
+                <ListItemPrefix>
+                    <UserGroupIcon className="h-5 w-5"/>
+                </ListItemPrefix>
+                Children
+            </ListItem>
+        </Link>
+        <Link to={"/programs"}>
+            <ListItem className={LIST_ITEM_STYLES}>
+                <ListItemPrefix>
+                    <MapIcon className="h-5 w-5"/>
+                </ListItemPrefix>
+                Programs
+            </ListItem>
+        </Link>
 
+        <Link to={"/history"}>
+            <ListItem className={LIST_ITEM_STYLES}>
+                <ListItemPrefix>
+                    <ClockIcon className="h-5 w-5"/>
+                </ListItemPrefix>
+                History
+            </ListItem>
+        </Link>
+    </List>
 
-            </List>
-            <hr className="my-2 border-gray-200"/>
-            <List>
+    <List>
 
-                <ListItem onClick={Logout} className="hover:text-red-600">
-                    <ListItemPrefix>
-                        <ArrowLeftStartOnRectangleIcon
-                            strokeWidth={2.5}
-                            className="h-5 w-5"
-                        />
-                    </ListItemPrefix>
-                    Sign Out
-                </ListItem>
-            </List>
+        <ListItem onClick={Logout} className="hover:text-red-600">
+            <ListItemPrefix>
+                <ArrowLeftStartOnRectangleIcon
+                    strokeWidth={2.5}
+                    className="h-5 w-5"
+                />
+            </ListItemPrefix>
+            Sign Out
+        </ListItem>
+    </List>
+</div>
         </Card>
     );
 }

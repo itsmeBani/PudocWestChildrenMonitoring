@@ -65,7 +65,7 @@ function Children(props) {
     }
     const [ChildrenList,setChildrenList]=useState([])
 
-
+    console.log(ChildrenList)
     const  options =(search,data)=> data?.filter(item =>
         item?.lastName?.toLowerCase().includes(search.toLowerCase()) |
         item?.firstName?.toLowerCase().includes(search.toLowerCase()) |
@@ -109,7 +109,7 @@ function Children(props) {
 
                         {ranges.map((item,index)=>{
 
-                            return <div className="flex  gap-1"><Chip value={null}  color={item?.color} className="mt-1 w-[12px] px-0 h-[10px]  rounded-lg"   /><p className="text-[13px]">{item?.status}</p></div>
+                            return <div key={index} className="flex  gap-1"><Chip value={null}  color={item?.color} className="mt-1 w-[12px] px-0 h-[10px]  rounded-lg"   /><p className="text-[13px]">{item?.status}</p></div>
                         })}
 
 
@@ -127,7 +127,7 @@ function Children(props) {
                                 </MenuHandler>
                                 <MenuList>
                                     {TABS?.map((value, index, array) => {
-                                        return <MenuItem onClick={() => FilterCategory(value.value)}
+                                        return <MenuItem  onClick={() => FilterCategory(value.value)}
                                                          key={index}>{value.label}</MenuItem>
                                     })}
                                 </MenuList>
@@ -249,12 +249,13 @@ function Children(props) {
                                         </td>
                                         <td className={classes}>
                                             <div className="flex justify-center">
+
                                                 <Chip variant={"ghost"} color={color} className=" text-center text-[10px]" value={txt} />
                                             </div>
                                         </td>
                                         <td className={"w-full flex p-2 gap-2"}>
                                             <Tooltip className="bg-indigo-700" content="Edit">
-                                                <IconButton onClick={() => EditCase(data)} className="" size={'sm'}
+                                                <IconButton onClick={() => EditCase(data,status)} className="" size={'sm'}
                                                             color={"indigo"}>
                                                     <PencilIcon className="h-4 w-4"/>
                                                 </IconButton>

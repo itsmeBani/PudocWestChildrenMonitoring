@@ -16,6 +16,7 @@ import useFetchByCategory from "./CustomHook/useFetchByCategory.js";
 import * as path from "node:path";
 import ProgramProvider from "./Context/ProgramContext.jsx";
 import supabase from "./Firebase-config/supabase-config.js";
+import History from "./Pages/History.jsx";
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
                     path: "programs",
                     element: <ProgramProvider><Programs /></ProgramProvider>,
                 },
+                {
+                    path:"history",
+                    element:<History/>
+                }
             ],
             errorElement:<_404/>
         },
