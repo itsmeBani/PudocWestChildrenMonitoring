@@ -58,7 +58,7 @@ function Dashboard(props) {
                     className={" col-span-2 gap-2 mb-2 md:mb-0  flex  flex-col w-full  bg-white h-[420px] overflow-hidden p-5 rounded-[12px]"}>
                     <div>
                         <Typography className="text-lg text-[20px]  text-gray-700  font-bold leading-1" variant="p">
-                            Map of Pudoct West Area
+                            Map of Pudoc West Area
                         </Typography>
                         <Typography className="text-[14px] leading-[20px] text-gray-700">
                             Covers Purok 1, Purok 2, Purok 3, and Purok 4 for better community insight.

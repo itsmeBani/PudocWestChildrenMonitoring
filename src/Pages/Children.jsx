@@ -65,7 +65,7 @@ function Children(props) {
     }
     const [ChildrenList,setChildrenList]=useState([])
 
-    console.log(ChildrenList)
+
     const  options =(search,data)=> data?.filter(item =>
         item?.lastName?.toLowerCase().includes(search.toLowerCase()) |
         item?.firstName?.toLowerCase().includes(search.toLowerCase()) |

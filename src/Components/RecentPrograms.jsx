@@ -30,15 +30,12 @@ const {ProgramData} = useFetchPrograms()
 
                         <div className="flex px-4 pt-3 pb-2 flex-col">
                             <Typography className="text-lg text-[20px] font-bold leading-1" variant="p">
-                                Recent Programs in Poduc West
+                                Recent Programs in Pudoc West
                             </Typography>
                             <Typography className="text-[14px] leading-[20px] text-gray-700">
                                 This effort aims to improve community involvement and promote better nutrition for children.
                             </Typography>
                         </div>
-
-
-
             </div>
 
             <CardBody className="overflow-y-scroll pt-0 p-0">
