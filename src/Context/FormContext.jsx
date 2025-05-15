@@ -74,7 +74,7 @@ export const FormProvider = ({children}) => {
                 if (StatusIsChange){
 
                     const ref = collection(db, 'children', formData.id, 'history');
-                    await addDoc(ref, formData);
+                    await addDoc(ref, {...formData,lastUpdate:serverTimestamp()});
                 }
 
             } else {

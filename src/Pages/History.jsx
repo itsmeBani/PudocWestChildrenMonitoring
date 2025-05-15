@@ -20,10 +20,11 @@ import EmptyState from "../Components/EmptyState.jsx";
 import InputFilter from "../Components/InputFilter.jsx";
 
 function History(props) {
-    const [open, setOpen] = React.useState(0);
+    const [open, setOpen] = React.useState(null);
     const handleOpen = (value) => setOpen(open === value ? null : value);
 
     const {Result} = useFetchByCategory()
+    console.log(Result)
     const {getBMIStatus} = useBmi()
     const [ChildrenList, setChildrenList] = useState([])
 
@@ -70,7 +71,7 @@ function History(props) {
                                                 <li className="relative">
                                                     <div className="flex items-center  ">
                                                         <div
-                                                            className={" w-[35px] rounded-full flex place-items-center  h-[35px]"}>
+                                                            className={"  rounded-full flex place-items-center  h-[35px]"}>
                                                             <svg className="w-4 h-4 text-indigo-800 dark:text-blue-300"
                                                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                                  fill="currentColor" viewBox="0 0 20 20">
@@ -79,12 +80,13 @@ function History(props) {
                                                             </svg>
                                                         </div>
                                                         {index !== item?.collection?.length - 1 && <div
-                                                            className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"/>}
+                                                            className="hidden  sm:flex w-full  bg-gray-200 h-0.5 dark:bg-gray-700"/>}
                                                     </div>
                                                     <div className="mt-3 sm:pe-8">
                                                         <time
-                                                            className="block mb-2 text-sm font-normal leading-none text-black/75 dark:text-gray-500">
-                                                            {item?.lastUpdate.toDate().toLocaleDateString('en-US', {
+                                                            className="block mb-2 text-[12px] font-normal leading-none text-black/75 dark:text-gray-500">
+
+                                                         <span className="font-thin ">Date Edited :</span> {data?.lastUpdate.toDate().toLocaleDateString('en-US', {
                                                                 year: 'numeric',
                                                                 month: 'long',
                                                                 day: 'numeric',
@@ -99,13 +101,20 @@ function History(props) {
                                                             measurements, {item.firstName} {item.lastName} is classified
                                                             as{" "}
                                                             <Chip
-                                                                className="font-semibold  px-2"
+                                                                className="font-semibold text-[11px]  px-2 py-0"
                                                                 value={status}
                                                                 color={color}
                                                                 variant="ghost"
-                                                            />.
+                                                            />
                                                         </Typography>
-
+                                                        <Typography
+                                                            className="text-[13px] mt-2 flex place-items-start gap-2 font-normal flex flex-col dark:text-gray-400">
+                                                        Recent Height: {data?.height}cm
+                                                        </Typography>
+                                                        <Typography
+                                                            className="text-[13px]  flex place-items-start gap-2 font-normal flex flex-col dark:text-gray-400">
+                                                            Recent Weight: {data?.weight}kg
+                                                        </Typography>
                                                     </div>
                                                 </li>
 

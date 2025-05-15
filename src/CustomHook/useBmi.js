@@ -5,7 +5,7 @@ export const useBmi = () => {
         { min: 18, max: 18.99, status: "MST (Moderate Stature)", color: "amber", txt: "MST" },
         { min: 19, max: 19.99, status: "SST (Super Stature)", color: "lime", txt: "SST" },
         { min: 20, max: 24.99, status: "Normal (Healthy Weight)", color: "green", txt: "Normal" },
-        { min: 25, max: 29.99, status: "SW/SAM (Slightly Overweight / Slightly Abnormal)", color: "yellow", txt: "SW/SAM" },
+        { min: 25, max: 29.99, status: "SW/SAM (Slightly Overweight)", color: "yellow", txt: "SW/SAM" },
         { min: 30, max: 34.99, status: "MW/MAM (Moderate Weight / Moderate Abnormal)", color: "light-green", txt: "MW/MAM" },
         { min: 35, max: Infinity, status: "Obesity (High Risk)", color: "red", txt: "Obesity" },
     ];
