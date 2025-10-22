@@ -46,50 +46,46 @@ export default function Gallery({ProgramID}) {
 
 
     const UploadImage = async (e) => {
-        const image = e.target.files[0]
-        setLoading(true)
+        const image = e.target.files[0];
+        setLoading(true);
+
         try {
-            const {data, error} = await supabase
+            const { data, error } = await supabase
                 .storage
                 .from('poducwest')
                 .upload(image.name, image, {
                     cacheControl: '3600',
                     upsert: true
-                })
+                });
 
+            if (error) throw error;
 
-            const {data: ImageUrl, error: ErrorUrl} = supabase
+            const { data: ImageUrl, error: ErrorUrl } = supabase
                 .storage
                 .from('poducwest')
-                .getPublicUrl(data?.path)
+                .getPublicUrl(data?.path);
+
+            if (ErrorUrl) throw ErrorUrl;
+
             if (ImageUrl?.publicUrl) {
                 await updateDoc(doc(db, "program", ProgramID), {
-                    images: [ImageUrl?.publicUrl, ...images]
+                    images: [ImageUrl.publicUrl, ...(Array.isArray(images) ? images : [])]
                 });
-                setStateMessage({
-                    success: "Successfully Upload",
-                    error: ""
-                })
-                FetchImages().then()
+
+                setStateMessage({ success: "Successfully Uploaded", error: "" });
+                FetchImages();
             }
         } catch (e) {
-
-            console.log(e)
-            setStateMessage({
-                success: "",
-                error: "Failed to Upload"
-            })
+            console.error(e);
+            setStateMessage({ success: "", error: "Failed to Upload" });
         } finally {
-            setLoading(false)
-
-            setTimeout(()=>{
-                setStateMessage({
-                    success: "",
-                    error: ""
-                })
-            },1000)
+            setLoading(false);
+            setTimeout(() => {
+                setStateMessage({ success: "", error: "" });
+            }, 1000);
         }
-    }
+    };
+
     const DeleteImage = async (index) => {
         const filterImages = images?.filter((item, i) => i !== index);
         await updateDoc(doc(db, "program", ProgramID), {
